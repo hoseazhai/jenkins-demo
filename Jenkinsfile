@@ -19,8 +19,8 @@ node('haimaxy') {
     stage('Push') {
         echo "4.Push Docker Image Stage"
         withCredentials([usernamePassword(credentialsId: 'aliyun', passwordVariable: 'aliyunPassword',usernameVariable: 'aliyunUser')]) {
-            sh "docker login -u ${aliyunHubUser} -p ${aliyunHubPassword} registry.cn-beijing.aliyuncs.com"
-            sh "docker push cnych/jenkins-demo:${build_tag}"
+            sh "docker login -u ${aliyunUser} -p ${aliyunPassword} registry.cn-beijing.aliyuncs.com"
+            sh "docker push registry.cn-beijing.aliyuncs.com/hosea/cnych:${build_tag}"
         }
     }
     stage('Deploy') {
