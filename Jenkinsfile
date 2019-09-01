@@ -14,12 +14,12 @@ node('haimaxy-jnlp') {
     }
     stage('Build') {
         echo "3.Build Docker Image Stage"
-        sh "docker build -t cnych/jenkins-demo:${build_tag} ."
+        sh "docker build -t registry.cn-beijing.aliyuncs.com/hosea/cnych:${build_tag} ."
     }
     stage('Push') {
         echo "4.Push Docker Image Stage"
-        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-            sh "docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
+        withCredentials([usernamePassword(credentialsId: 'aliyun', passwordVariable: 'aliyunPassword',usernameVariable: 'aliyunUser')]) {
+            sh "docker login -u ${aliyunHubUser} -p ${aliyunHubPassword} registry.cn-beijing.aliyuncs.com"
             sh "docker push cnych/jenkins-demo:${build_tag}"
         }
     }
