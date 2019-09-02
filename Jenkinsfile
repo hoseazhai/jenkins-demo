@@ -2,6 +2,16 @@ node('haimaxy') {
     stage('Prepare') {
         echo "1.Prepare Stage"
         checkout scm
+        
+        def branchName = getCurrentBranch()
+        echo 'My branch is' + branchName
+
+        def getCurrentBranch () {
+            return sh (
+              script: 'git rev-parse --abbrev-ref HEAD',
+               returnStdout: true
+             ).trim()
+        }
         script {
             sh 'git rev-parse HEAD > commit'
             def commit = readFile('commit').trim()
