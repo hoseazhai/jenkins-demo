@@ -8,7 +8,7 @@ node('haimaxy') {
             build_tag = commit
             if (env.BRANCH_NAME != 'master') {
                 echo "${env.BRANCH_NAME}"
-                build_tag = "${env.BRANCH_NAME}-${build_tag}"
+                build_tag = "${env.BRANCH_NAME}${build_tag}"
             }
         }
     }
