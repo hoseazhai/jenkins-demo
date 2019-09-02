@@ -3,8 +3,7 @@ node('haimaxy') {
         echo "1.Prepare Stage"
         checkout scm
         script {
-            sh(returnStdout: true, script: 'git rev-parse HEAD > commit')     
-            def build_tag = readFile('commit').trim()
+            build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
             if (env.BRANCH_NAME != 'master') {
                 echo "${env.BRANCH_NAME}"
                 build_tag = "${env.BRANCH_NAME}-${build_tag}"
