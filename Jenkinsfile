@@ -2,6 +2,15 @@ node('haimaxy') {
     stage('Prepare') {
         echo "1.Prepare Stage"
         checkout scm
+        def branchName = getCurrentBranch()
+        echo 'My branch is' + branchName
+
+        def getCurrentBranch () {
+           return sh (
+              script: 'git rev-parse --abbrev-ref HEAD',
+             returnStdout: true
+         ).trim()
+        }
         script {
             build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
             if (env.BRANCH_NAME != 'master') {
