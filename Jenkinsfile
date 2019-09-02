@@ -1,6 +1,6 @@
 node('haimaxy') {
     stage('Buildyy') {
-        echo 'Pulling...' + ${BRANCH_NAME}
+        echo "Pulling...  ${BRANCH_NAME"
         checkout scm
         }
     stage('Prepare') {
