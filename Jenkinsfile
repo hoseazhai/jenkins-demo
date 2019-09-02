@@ -4,7 +4,7 @@ node('haimaxy') {
         checkout scm
         script {
             sh(returnStdout: true, script: 'git rev-parse HEAD > commit')     
-            build_tag = readFile('commit').trim()
+            def build_tag = readFile('commit').trim()
             if (env.BRANCH_NAME != 'master') {
                 echo "${env.BRANCH_NAME}"
                 build_tag = "${env.BRANCH_NAME}-${build_tag}"
